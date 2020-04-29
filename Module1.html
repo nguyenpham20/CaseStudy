@@ -5,7 +5,27 @@
     <title>Title</title>
 </head>
 <body>
-<canvas id="myCanvas" width="480" height="320" style="border:1px solid red;"></canvas>
+
+<canvas id="myCanvas" width="500" height="500" style="border:1px solid red;">
+</canvas>
+<div id="dongHo"></div>
+<script>
+    let so = 11;
+    function demNguoc() {
+
+        so--;
+        if (so != 0) {
+            document.getElementById("dongHo").innerHTML = so;
+            setTimeout("demNguoc()", 1000);
+        }else {
+            document.getElementById("dongHo").innerHTML = "Het thoi gian!";
+            // window.location.
+        }
+
+    }
+    demNguoc();
+</script>
+
 <script src="Module1.js">
 </script>
 </body>

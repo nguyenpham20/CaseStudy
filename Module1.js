@@ -6,8 +6,8 @@ let ballRadius = 10;
 let x = canvas.width/2;
 let y = canvas.height-30;
 
-let dx = 2;
-let dy = -2;
+let dx = 4;
+let dy = -3;
 
 let paddleHeight = 10;
 let paddleWidth = 75;
@@ -22,7 +22,7 @@ let brickColumnCount = 5;
 let brickWidth = 75;
 let brickHeight = 20;
 let brickPadding = 10;
-let brickOffsetTop = 30;
+let brickOffsetTop = 70;
 let brickOffsetLeft = 30;
 
 let bricks = [];
@@ -30,13 +30,27 @@ let bricks = [];
 let score = 0;
 
 let lives = 3;
+let times = 0;
 
+let countDownDate = new Date("may 5, 2020 14:20:00").getTime();
+let a = setInterval(function() {
+    let now = new Date().getTime();
+    let distance = countDownDate - now;
+    let minutes = Math.floor((distance % (1000 * 60 * 3)) / (1000 * 60));
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById("myCanvas").innerHTML = minutes + "m " + seconds + "s ";
+    if (distance < 0) {
+        clearInterval(a);
+        document.getElementById("myCanvas").innerHTML = "EXPIRED";
+    }
+}, 1000);
 for (let c=0; c<brickColumnCount; c++){
     bricks[c] = [];
     for (let r=0; r<brickRowCount; r++) {
         bricks[c][r] = {x: 0, y: 0, status: 1};
     }
 }
+
 
 
 document.addEventListener("keydown", keyDownHandler, false);
@@ -90,26 +104,32 @@ function collisionDetection() {
 function drawScore() {
     ctx.font = "16px Arial";
     ctx.fillStyle = "#0095DD";
-    ctx.fillText("Score: " +score, 8, 20);
+    ctx.fillText("Score: " +score, 10, 40);
 }
 
 function drawLives() {
     ctx.font = "16px Arial";
-    ctx.fillStyle = "#0095DD";
-    ctx.fillText("Lives: "+lives, canvas.width-65, 20);
+    ctx.fillStyle = "#FF0000";
+    ctx.fillText("Lives: "+lives, canvas.width-65, 30);
+
+}
+function drawTimes() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#FF0000";
+    ctx.fillText("Times: "+times, 10, 20);
 
 }
 function drawBall() {
     ctx.beginPath();
     ctx.arc(x, y, ballRadius, 0, Math.PI*2, false);
-    ctx.fillStyle = "#0095DD";
+    ctx.fillStyle = "#FFA500";
     ctx.fill();
     ctx.closePath();
 }
 function drawPaddle() {
     ctx.beginPath();
     ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-    ctx.fillStyle = "#0095DD";
+    ctx.fillStyle = "#228B22";
     ctx.fill();
     ctx.closePath();
 }
@@ -123,7 +143,7 @@ function drawBricks() {
                 bricks[c][r].y = brickY;
                 ctx.beginPath();
                 ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                ctx.fillStyle = "#0095DD";
+                ctx.fillStyle = "#FF1493";
                 ctx.fill();
                 ctx.closePath();
             }
@@ -138,6 +158,7 @@ function draw(){
     drawPaddle();
     drawScore();
     drawLives();
+    drawTimes();
     collisionDetection();
 
 
