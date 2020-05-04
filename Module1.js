@@ -30,20 +30,7 @@ let bricks = [];
 let score = 0;
 
 let lives = 3;
-let times = 0;
 
-let countDownDate = new Date("may 5, 2020 14:20:00").getTime();
-let a = setInterval(function() {
-    let now = new Date().getTime();
-    let distance = countDownDate - now;
-    let minutes = Math.floor((distance % (1000 * 60 * 3)) / (1000 * 60));
-    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    document.getElementById("myCanvas").innerHTML = minutes + "m " + seconds + "s ";
-    if (distance < 0) {
-        clearInterval(a);
-        document.getElementById("myCanvas").innerHTML = "EXPIRED";
-    }
-}, 1000);
 for (let c=0; c<brickColumnCount; c++){
     bricks[c] = [];
     for (let r=0; r<brickRowCount; r++) {
@@ -113,12 +100,6 @@ function drawLives() {
     ctx.fillText("Lives: "+lives, canvas.width-65, 30);
 
 }
-function drawTimes() {
-    ctx.font = "16px Arial";
-    ctx.fillStyle = "#FF0000";
-    ctx.fillText("Times: "+times, 10, 20);
-
-}
 function drawBall() {
     ctx.beginPath();
     ctx.arc(x, y, ballRadius, 0, Math.PI*2, false);
@@ -158,7 +139,6 @@ function draw(){
     drawPaddle();
     drawScore();
     drawLives();
-    drawTimes();
     collisionDetection();
 
 

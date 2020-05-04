@@ -8,22 +8,17 @@
 
 <canvas id="myCanvas" width="500" height="500" style="border:1px solid red;">
 </canvas>
-<div id="dongHo"></div>
+<div id="clock"></div>
 <script>
-    let so = 11;
-    function demNguoc() {
-
-        so--;
+    let so = 0;
+    function countDown() {
+        so++;
         if (so != 0) {
-            document.getElementById("dongHo").innerHTML = so;
-            setTimeout("demNguoc()", 1000);
-        }else {
-            document.getElementById("dongHo").innerHTML = "Het thoi gian!";
-            // window.location.
+            document.getElementById("clock").innerHTML = "Time:" +so+ 's';
+            setTimeout("countDown();", 1000);
         }
-
     }
-    demNguoc();
+    countDown();
 </script>
 
 <script src="Module1.js">
