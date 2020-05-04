@@ -80,7 +80,7 @@ function collisionDetection() {
                     if(score == brickRowCount*brickColumnCount) {
                         alert("YOU WIN, CONGRATULATIONS!");
                         document.location.reload();
-                        clearInterval(interval); // Needed for Chrome to end game
+                        clearInterval(); // Needed for Chrome to end game
                     }
                 }
             }
