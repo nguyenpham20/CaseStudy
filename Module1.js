@@ -16,7 +16,6 @@ let paddleX = (canvas.width-paddleWidth)/2;
 let rightPressed = false;
 let leftPressed = false;
 
-//Khai bao hang gach
 let brickRowCount = 3;
 let brickColumnCount = 5;
 let brickWidth = 75;
